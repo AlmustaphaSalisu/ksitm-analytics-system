@@ -7,8 +7,8 @@ const LecturerClassesPage = () => {
   const classes = [
     {
       id: 1,
-      name: 'Computer Science 101',
-      code: 'CS101',
+      name: 'Computer System',
+      code: 'CSE101',
       students: 45,
       schedule: 'Mon, Wed, Fri - 9:00 AM',
       progress: 75,
@@ -16,8 +16,8 @@ const LecturerClassesPage = () => {
     },
     {
       id: 2,
-      name: 'Data Structures',
-      code: 'CS201',
+      name: 'Data Structure and Algorithm',
+      code: 'CSE102',
       students: 38,
       schedule: 'Tue, Thu - 2:00 PM',
       progress: 60,
@@ -25,8 +25,8 @@ const LecturerClassesPage = () => {
     },
     {
       id: 3,
-      name: 'Algorithms',
-      code: 'CS301',
+      name: 'Programming Concept',
+      code: 'CSE201',
       students: 32,
       schedule: 'Mon, Wed - 11:00 AM',
       progress: 45,

@@ -4,9 +4,9 @@ import { Brain, TrendingUp, AlertTriangle, Lightbulb, Users, Target } from 'luci
 import { RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 const studentInsights = [
-  { category: 'Performance', icon: TrendingUp, color: 'primary', items: ['Your GPA has improved by 0.13 this semester', 'You are in the top 30% of your department', 'Data Structures is your strongest course'] },
-  { category: 'Risk Analysis', icon: AlertTriangle, color: 'warning', items: ['Low risk of academic probation', 'MTH301 attendance is a concern area', 'No dropout risk indicators detected'] },
-  { category: 'Recommendations', icon: Lightbulb, color: 'info', items: ['Allocate more time to Numerical Methods', 'Join study groups for Operating Systems', 'Consider undergraduate research opportunities'] },
+  { category: 'Performance', icon: TrendingUp, color: 'primary', items: ['Your GPA has improved by 0.13 this semester', 'You are in the top 30% of your department', 'Data Structure and Algorithm is your strongest course'] },
+  { category: 'Risk Analysis', icon: AlertTriangle, color: 'warning', items: ['Low risk of academic probation', 'CSE131 attendance is a concern area', 'No dropout risk indicators detected'] },
+  { category: 'Recommendations', icon: Lightbulb, color: 'info', items: ['Allocate more time to CSE121', 'Join study groups for CSE221', 'Consider undergraduate research opportunities'] },
 ];
 
 const radarData = [

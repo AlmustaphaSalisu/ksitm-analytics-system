@@ -4,15 +4,18 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { useState } from 'react';
 
 const SysAdminUsersPage = () => {
-  const users = [
+  const [users, setUsers] = useState([
     {
       id: 1,
       name: 'John Smith',
       email: 'john.smith@ksitm.edu',
       role: 'lecturer',
-      department: 'Computer Science',
+      department: 'COM',
       status: 'active',
       lastLogin: '2 hours ago',
       permissions: ['lecturer', 'attendance', 'grading'],
@@ -22,7 +25,7 @@ const SysAdminUsersPage = () => {
       name: 'Sarah Johnson',
       email: 'sarah.j@ksitm.edu',
       role: 'student',
-      department: 'Computer Science',
+      department: 'COM',
       status: 'active',
       lastLogin: '1 day ago',
       permissions: ['student', 'view_grades'],
@@ -32,7 +35,7 @@ const SysAdminUsersPage = () => {
       name: 'Dr. Michael Brown',
       email: 'michael.b@ksitm.edu',
       role: 'hod',
-      department: 'Computer Science',
+      department: 'COM',
       status: 'active',
       lastLogin: '30 minutes ago',
       permissions: ['hod', 'department_management', 'reports'],
@@ -42,12 +45,22 @@ const SysAdminUsersPage = () => {
       name: 'Emily Davis',
       email: 'emily.d@ksitm.edu',
       role: 'admin',
-      department: 'Administration',
+      department: 'BOP',
       status: 'inactive',
       lastLogin: '1 week ago',
       permissions: ['admin', 'system_config'],
     },
-  ];
+  ]);
+
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    role: 'student',
+    department: 'COM',
+    status: 'active',
+  });
 
   const getRoleColor = (role: string) => {
     switch (role) {
@@ -69,6 +82,34 @@ const SysAdminUsersPage = () => {
     }
   };
 
+  const handleAddUser = () => {
+    const user = {
+      id: users.length + 1,
+      ...newUser,
+      lastLogin: 'Never',
+      permissions: [newUser.role],
+    };
+    setUsers([...users, user]);
+    setNewUser({
+      name: '',
+      email: '',
+      role: 'student',
+      department: 'COM',
+      status: 'active',
+    });
+    setIsAddDialogOpen(false);
+  };
+
+  const handleDeleteUser = (id: number) => {
+    setUsers(users.filter(user => user.id !== id));
+  };
+
+  const filteredUsers = users.filter(user =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.role.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -76,7 +117,7 @@ const SysAdminUsersPage = () => {
           <h1 className="text-3xl font-bold">User Management</h1>
           <p className="text-muted-foreground">Manage system users and permissions</p>
         </div>
-        <Button>
+        <Button onClick={() => setIsAddDialogOpen(true)}>
           <Plus className="mr-2 h-4 w-4" />
           Add User
         </Button>
@@ -130,7 +171,12 @@ const SysAdminUsersPage = () => {
       <div className="flex items-center gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search users..." className="pl-10" />
+          <Input 
+            placeholder="Search users..." 
+            className="pl-10" 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
         <Button variant="outline">
           <Filter className="mr-2 h-4 w-4" />
@@ -146,7 +192,7 @@ const SysAdminUsersPage = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <div key={user.id} className="flex items-center justify-between p-4 border rounded-lg">
                 <div className="flex items-center gap-4">
                   <Avatar>
@@ -174,7 +220,7 @@ const SysAdminUsersPage = () => {
                     <Button variant="outline" size="sm">
                       <Shield className="h-4 w-4" />
                     </Button>
-                    <Button variant="destructive" size="sm">
+                    <Button variant="destructive" size="sm" onClick={() => handleDeleteUser(user.id)}>
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -184,6 +230,70 @@ const SysAdminUsersPage = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Add User Dialog */}
+      <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Add New User</DialogTitle>
+            <DialogDescription>Enter the user details below.</DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">Name</Label>
+              <Input
+                id="name"
+                value={newUser.name}
+                onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="email" className="text-right">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={newUser.email}
+                onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="role" className="text-right">Role</Label>
+              <Input
+                id="role"
+                value={newUser.role}
+                onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                className="col-span-3"
+                placeholder="student, lecturer, hod, admin, sysadmin"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="department" className="text-right">Department</Label>
+              <Input
+                id="department"
+                value={newUser.department}
+                onChange={(e) => setNewUser({ ...newUser, department: e.target.value })}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="status" className="text-right">Status</Label>
+              <Input
+                id="status"
+                value={newUser.status}
+                onChange={(e) => setNewUser({ ...newUser, status: e.target.value })}
+                className="col-span-3"
+                placeholder="active, inactive, suspended"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleAddUser}>Add User</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

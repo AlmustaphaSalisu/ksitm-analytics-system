@@ -12,9 +12,9 @@ export interface User {
 }
 
 export const mockUsers: Record<UserRole, User> = {
-  student: { id: '1', name: 'Amina Yusuf', email: 'amina@ksitm.edu.ng', role: 'student', department: 'Computer Science' },
-  lecturer: { id: '2', name: 'Dr. Ibrahim Musa', email: 'ibrahim@ksitm.edu.ng', role: 'lecturer', department: 'Computer Science' },
-  hod: { id: '3', name: 'Prof. Fatima Abubakar', email: 'fatima@ksitm.edu.ng', role: 'hod', department: 'Computer Science' },
+  student: { id: '1', name: 'Amina Yusuf', email: 'amina@ksitm.edu.ng', role: 'student', department: 'COM' },
+  lecturer: { id: '2', name: 'Dr. Ibrahim Musa', email: 'ibrahim@ksitm.edu.ng', role: 'lecturer', department: 'COM' },
+  hod: { id: '3', name: 'Prof. Fatima Abubakar', email: 'fatima@ksitm.edu.ng', role: 'hod', department: 'COM' },
   admin: { id: '4', name: 'Alhaji Sani Bello', email: 'sani@ksitm.edu.ng', role: 'admin' },
   sysadmin: { id: '5', name: 'Usman Danladi', email: 'usman@ksitm.edu.ng', role: 'sysadmin' },
 };
@@ -36,12 +36,12 @@ export const studentPerformance = {
   completedCredits: 84,
   totalCredits: 120,
   courses: [
-    { code: 'CSC301', name: 'Data Structures', grade: 'A', score: 82, attendance: 92, status: 'active' },
-    { code: 'CSC303', name: 'Operating Systems', grade: 'B+', score: 75, attendance: 88, status: 'active' },
-    { code: 'CSC305', name: 'Database Systems', grade: 'A-', score: 78, attendance: 90, status: 'active' },
-    { code: 'MTH301', name: 'Numerical Methods', grade: 'B', score: 68, attendance: 80, status: 'active' },
-    { code: 'CSC307', name: 'Computer Networks', grade: 'B+', score: 73, attendance: 85, status: 'active' },
-    { code: 'GST301', name: 'Entrepreneurship', grade: 'A', score: 85, attendance: 95, status: 'active' },
+    { code: 'CSE101', name: 'Computer System', grade: 'A', score: 82, attendance: 92, status: 'active' },
+    { code: 'CSE111', name: 'Introduction to Programming', grade: 'B+', score: 75, attendance: 88, status: 'active' },
+    { code: 'CSE121', name: 'Basic Digital System', grade: 'A-', score: 78, attendance: 90, status: 'active' },
+    { code: 'CSE131', name: 'Internet and World Wide Web', grade: 'B', score: 68, attendance: 80, status: 'active' },
+    { code: 'CSE102', name: 'Data Structure and Algorithm', grade: 'B+', score: 73, attendance: 85, status: 'active' },
+    { code: 'ENT201', name: 'Introduction to Entrepreneuship', grade: 'A', score: 85, attendance: 95, status: 'active' },
   ],
   gpaHistory: [
     { semester: '100L S1', gpa: 2.8 },
@@ -52,10 +52,10 @@ export const studentPerformance = {
     { semester: '300L S2', gpa: 3.45 },
   ],
   aiRecommendations: [
-    { type: 'study', message: 'Focus more on Numerical Methods - your score is below average', priority: 'high' },
-    { type: 'resource', message: 'Recommended: MIT OCW Operating Systems lectures', priority: 'medium' },
-    { type: 'attendance', message: 'Your MTH301 attendance is dropping - attend next 3 classes', priority: 'high' },
-    { type: 'strength', message: 'Great performance in Data Structures! Consider advanced algorithms', priority: 'low' },
+    { type: 'study', message: 'Focus more on CSE131 - your score is below average', priority: 'high' },
+    { type: 'resource', message: 'Recommended: MIT OCW CSE121 lectures', priority: 'medium' },
+    { type: 'attendance', message: 'Your CSE131 attendance is dropping - attend next 3 classes', priority: 'high' },
+    { type: 'strength', message: 'Great performance in CSE102! Consider advanced algorithms', priority: 'low' },
   ],
 };
 
@@ -65,17 +65,17 @@ export const lecturerData = {
   passRate: 78.3,
   atRiskStudents: 12,
   courses: [
-    { code: 'CSC301', name: 'Data Structures', students: 45, avgScore: 72, passRate: 85, attendance: 88 },
-    { code: 'CSC305', name: 'Database Systems', students: 52, avgScore: 65, passRate: 74, attendance: 82 },
-    { code: 'CSC401', name: 'AI & Machine Learning', students: 38, avgScore: 70, passRate: 79, attendance: 90 },
-    { code: 'CSC201', name: 'Intro to Programming', students: 21, avgScore: 58, passRate: 65, attendance: 76 },
+    { code: 'CSE101', name: 'Computer System', students: 45, avgScore: 72, passRate: 85, attendance: 88 },
+    { code: 'CSE102', name: 'Data Structure and Algorithm', students: 52, avgScore: 65, passRate: 74, attendance: 82 },
+    { code: 'CSE201', name: 'Programming Concept', students: 38, avgScore: 70, passRate: 79, attendance: 90 },
+    { code: 'CSE111', name: 'Introduction to Programming', students: 21, avgScore: 58, passRate: 65, attendance: 76 },
   ],
   atRiskList: [
-    { id: '101', name: 'Ahmad Bello', course: 'CSC301', score: 35, attendance: 45, risk: 'high' as const },
-    { id: '102', name: 'Zainab Musa', course: 'CSC305', score: 42, attendance: 55, risk: 'high' as const },
-    { id: '103', name: 'Ibrahim Sani', course: 'CSC201', score: 48, attendance: 60, risk: 'medium' as const },
-    { id: '104', name: 'Hauwa Danladi', course: 'CSC401', score: 50, attendance: 68, risk: 'medium' as const },
-    { id: '105', name: 'Yusuf Abdullahi', course: 'CSC301', score: 38, attendance: 50, risk: 'high' as const },
+    { id: '101', name: 'Ahmad Bello', course: 'CSE101', score: 35, attendance: 45, risk: 'high' as const },
+    { id: '102', name: 'Zainab Musa', course: 'CSE102', score: 42, attendance: 55, risk: 'high' as const },
+    { id: '103', name: 'Ibrahim Sani', course: 'CSE111', score: 48, attendance: 60, risk: 'medium' as const },
+    { id: '104', name: 'Hauwa Danladi', course: 'CSE201', score: 50, attendance: 68, risk: 'medium' as const },
+    { id: '105', name: 'Yusuf Abdullahi', course: 'CSE101', score: 38, attendance: 50, risk: 'high' as const },
   ],
   performanceTrend: [
     { month: 'Sep', avgScore: 62, attendance: 85 },
@@ -86,9 +86,9 @@ export const lecturerData = {
     { month: 'Feb', avgScore: 67, attendance: 84 },
   ],
   aiSuggestions: [
-    'Consider adding more practical exercises in CSC201 - student engagement is low',
-    'CSC305 has a high failure rate - review assessment difficulty',
-    'Students respond well to your AI & ML course - consider mentorship program',
+    'Consider adding more practical exercises in CSE111 - student engagement is low',
+    'CSE102 has a high failure rate - review assessment difficulty',
+    'Students respond well to your CSE201 course - consider mentorship program',
   ],
 };
 
@@ -107,11 +107,11 @@ export const hodData = {
     { name: 'Dr. Bashir Yusuf', courses: 3, avgScore: 65, rating: 4.0, passRate: 72 },
   ],
   courseComparison: [
-    { course: 'CSC301', passRate: 85, avgScore: 72, students: 45 },
-    { course: 'CSC303', passRate: 74, avgScore: 65, students: 52 },
-    { course: 'CSC305', passRate: 79, avgScore: 70, students: 38 },
-    { course: 'CSC307', passRate: 65, avgScore: 58, students: 42 },
-    { course: 'CSC401', passRate: 88, avgScore: 75, students: 35 },
+    { course: 'CSE101', passRate: 85, avgScore: 72, students: 45 },
+    { course: 'CSE111', passRate: 74, avgScore: 65, students: 52 },
+    { course: 'CSE102', passRate: 79, avgScore: 70, students: 38 },
+    { course: 'CSE121', passRate: 65, avgScore: 58, students: 42 },
+    { course: 'CSE201', passRate: 88, avgScore: 75, students: 35 },
   ],
   dropoutTrend: [
     { year: '2019', rate: 6.8 },
@@ -131,12 +131,12 @@ export const adminData = {
   overallGpa: 3.05,
   dropoutRate: 3.2,
   departmentPerformance: [
-    { dept: 'Computer Science', students: 892, gpa: 2.98, passRate: 78, dropout: 4.2 },
-    { dept: 'Electrical Eng.', students: 654, gpa: 3.12, passRate: 82, dropout: 3.1 },
-    { dept: 'Civil Eng.', students: 543, gpa: 2.85, passRate: 74, dropout: 5.0 },
-    { dept: 'Business Admin', students: 876, gpa: 3.25, passRate: 85, dropout: 2.8 },
-    { dept: 'Mass Comm', students: 432, gpa: 3.15, passRate: 80, dropout: 3.5 },
-    { dept: 'Accounting', students: 765, gpa: 3.08, passRate: 79, dropout: 3.0 },
+    { dept: 'COM', students: 892, gpa: 2.98, passRate: 78, dropout: 4.2 },
+    { dept: 'HND-AI', students: 654, gpa: 3.12, passRate: 82, dropout: 3.1 },
+    { dept: 'HND-CS', students: 543, gpa: 2.85, passRate: 74, dropout: 5.0 },
+    { dept: 'HND-ACC', students: 876, gpa: 3.25, passRate: 85, dropout: 2.8 },
+    { dept: 'HND-NCC', students: 432, gpa: 3.15, passRate: 80, dropout: 3.5 },
+    { dept: 'HND-CDP', students: 765, gpa: 3.08, passRate: 79, dropout: 3.0 },
   ],
   enrollmentTrend: [
     { year: '2019', students: 4200 },
@@ -188,8 +188,8 @@ export const sysadminData = {
 };
 
 export const notifications = [
-  { id: '1', title: 'Low Attendance Warning', message: 'Your MTH301 attendance is below 80%', type: 'warning' as const, time: '2h ago', read: false },
-  { id: '2', title: 'Grade Posted', message: 'CSC301 Assignment 3 grade has been posted', type: 'info' as const, time: '5h ago', read: false },
+  { id: '1', title: 'Low Attendance Warning', message: 'Your CSE131 attendance is below 80%', type: 'warning' as const, time: '2h ago', read: false },
+  { id: '2', title: 'Grade Posted', message: 'CSE101 Assignment 3 grade has been posted', type: 'info' as const, time: '5h ago', read: false },
   { id: '3', title: 'AI Recommendation', message: 'New study resources recommended for you', type: 'success' as const, time: '1d ago', read: true },
   { id: '4', title: 'Exam Schedule', message: 'Mid-semester exams start in 2 weeks', type: 'info' as const, time: '2d ago', read: true },
 ];

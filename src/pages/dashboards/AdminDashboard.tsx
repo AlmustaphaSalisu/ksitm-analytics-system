@@ -6,6 +6,33 @@ import { Button } from '@/components/ui/button';
 
 const d = adminData;
 
+const handleExportPDF = () => {
+  window.print();
+};
+
+const handleExportExcel = () => {
+  const csvContent = [
+    ['Department', 'Students', 'GPA', 'Pass Rate', 'Dropout'],
+    ...d.departmentPerformance.map(dept => [
+      dept.dept,
+      dept.students,
+      dept.gpa,
+      dept.passRate,
+      dept.dropout
+    ])
+  ].map(row => row.join(',')).join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  link.setAttribute('href', url);
+  link.setAttribute('download', 'ksitm_department_performance.csv');
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 export default function AdminDashboard() {
   return (
     <div className="space-y-6 animate-fade-in">
@@ -15,10 +42,10 @@ export default function AdminDashboard() {
           <p className="text-muted-foreground text-sm">KSITM academic analytics dashboard</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={() => alert('PDF export functionality would be implemented here')}>
+          <Button variant="outline" size="sm" onClick={handleExportPDF}>
             <Download className="h-4 w-4 mr-1.5" /> Export PDF
           </Button>
-          <Button variant="outline" size="sm" onClick={() => alert('Excel export functionality would be implemented here')}>
+          <Button variant="outline" size="sm" onClick={handleExportExcel}>
             <FileText className="h-4 w-4 mr-1.5" /> Export Excel
           </Button>
         </div>

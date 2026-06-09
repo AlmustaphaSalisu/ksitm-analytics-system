@@ -11,35 +11,35 @@ const LecturerAttendancePage = () => {
       studentName: 'John Smith',
       time: '8:55 AM',
       status: 'present',
-      course: 'CS101',
+      course: 'CSE101',
     },
     {
       id: 2,
       studentName: 'Sarah Johnson',
       time: '9:02 AM',
       status: 'present',
-      course: 'CS101',
+      course: 'CSE101',
     },
     {
       id: 3,
       studentName: 'Michael Brown',
       time: '--',
       status: 'absent',
-      course: 'CS101',
+      course: 'CSE101',
     },
     {
       id: 4,
       studentName: 'Emily Davis',
       time: '8:58 AM',
       status: 'present',
-      course: 'CS101',
+      course: 'CSE101',
     },
   ];
 
   const attendanceStats = [
-    { course: 'CS101', present: 38, absent: 7, total: 45, rate: 84 },
-    { course: 'CS201', present: 35, absent: 3, total: 38, rate: 92 },
-    { course: 'CS301', present: 30, absent: 2, total: 32, rate: 94 },
+    { course: 'CSE101', present: 38, absent: 7, total: 45, rate: 84 },
+    { course: 'CSE111', present: 35, absent: 3, total: 38, rate: 92 },
+    { course: 'CSE201', present: 30, absent: 2, total: 32, rate: 94 },
   ];
 
   return (
@@ -149,8 +149,8 @@ const LecturerAttendancePage = () => {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>Today's Attendance - CS101</CardTitle>
-              <CardDescription>9:00 AM - Computer Science 101</CardDescription>
+              <CardTitle>Today's Attendance - CSE101</CardTitle>
+              <CardDescription>9:00 AM - Computer System</CardDescription>
             </div>
             <Badge variant="outline">84% Present</Badge>
           </div>

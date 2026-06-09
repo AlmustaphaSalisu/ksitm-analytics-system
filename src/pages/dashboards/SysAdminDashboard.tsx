@@ -6,6 +6,9 @@ import { Activity, Users, Server, AlertTriangle, Database, HardDrive, Cpu, Trash
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 const d = sysadminData;
 
@@ -17,6 +20,42 @@ const logLevelStyles = {
 
 export default function SysAdminDashboard() {
   const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'logs'>('overview');
+  const [users, setUsers] = useState(sysadminData.users);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    role: 'student' as UserRole,
+    status: 'active',
+  });
+
+  const handleAddUser = () => {
+    const user = {
+      id: String(users.length + 1),
+      ...newUser,
+      lastLogin: 'Never',
+    };
+    setUsers([...users, user]);
+    setNewUser({ name: '', email: '', role: 'student', status: 'active' });
+    setIsAddDialogOpen(false);
+  };
+
+  const handleEditUser = (user: any) => {
+    setSelectedUser(user);
+    setIsEditDialogOpen(true);
+  };
+
+  const handleUpdateUser = () => {
+    setUsers(users.map(u => u.id === selectedUser.id ? { ...u, ...selectedUser } : u));
+    setIsEditDialogOpen(false);
+    setSelectedUser(null);
+  };
+
+  const handleDeleteUser = (id: string) => {
+    setUsers(users.filter(u => u.id !== id));
+  };
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -74,7 +113,7 @@ export default function SysAdminDashboard() {
         <div className="rounded-lg border bg-card p-5 shadow-card">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold">User Management</h3>
-            <Button size="sm" className="gradient-primary border-0 text-primary-foreground" onClick={() => alert('Add user functionality would be implemented here')}><Plus className="h-4 w-4 mr-1" /> Add User</Button>
+            <Button size="sm" className="gradient-primary border-0 text-primary-foreground" onClick={() => setIsAddDialogOpen(true)}><Plus className="h-4 w-4 mr-1" /> Add User</Button>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -89,7 +128,7 @@ export default function SysAdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {d.users.map(u => (
+                {users.map(u => (
                   <tr key={u.id} className="border-b last:border-0 hover:bg-muted/50">
                     <td className="py-3 font-medium">{u.name}</td>
                     <td className="py-3 text-muted-foreground">{u.email}</td>
@@ -102,8 +141,8 @@ export default function SysAdminDashboard() {
                     <td className="py-3 text-muted-foreground">{u.lastLogin}</td>
                     <td className="py-3">
                       <div className="flex gap-1">
-                        <button className="rounded p-1.5 hover:bg-muted" onClick={() => alert('Edit user functionality would be implemented here')}><Edit className="h-3.5 w-3.5" /></button>
-                        <button className="rounded p-1.5 hover:bg-destructive/10 text-destructive" onClick={() => alert('Delete user functionality would be implemented here')}><Trash2 className="h-3.5 w-3.5" /></button>
+                        <button className="rounded p-1.5 hover:bg-muted" onClick={() => handleEditUser(u)}><Edit className="h-3.5 w-3.5" /></button>
+                        <button className="rounded p-1.5 hover:bg-destructive/10 text-destructive" onClick={() => handleDeleteUser(u.id)}><Trash2 className="h-3.5 w-3.5" /></button>
                       </div>
                     </td>
                   </tr>
@@ -132,6 +171,116 @@ export default function SysAdminDashboard() {
           </div>
         </div>
       )}
+
+      {/* Add User Dialog */}
+      <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Add New User</DialogTitle>
+            <DialogDescription>Enter the user details below.</DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">Name</Label>
+              <Input
+                id="name"
+                value={newUser.name}
+                onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="email" className="text-right">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={newUser.email}
+                onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="role" className="text-right">Role</Label>
+              <Input
+                id="role"
+                value={newUser.role}
+                onChange={(e) => setNewUser({ ...newUser, role: e.target.value as UserRole })}
+                className="col-span-3"
+                placeholder="student, lecturer, hod, admin, sysadmin"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="status" className="text-right">Status</Label>
+              <Input
+                id="status"
+                value={newUser.status}
+                onChange={(e) => setNewUser({ ...newUser, status: e.target.value })}
+                className="col-span-3"
+                placeholder="active, inactive"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleAddUser}>Add User</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit User Dialog */}
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit User</DialogTitle>
+            <DialogDescription>Update the user details below.</DialogDescription>
+          </DialogHeader>
+          {selectedUser && (
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="edit-name" className="text-right">Name</Label>
+                <Input
+                  id="edit-name"
+                  value={selectedUser.name}
+                  onChange={(e) => setSelectedUser({ ...selectedUser, name: e.target.value })}
+                  className="col-span-3"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="edit-email" className="text-right">Email</Label>
+                <Input
+                  id="edit-email"
+                  type="email"
+                  value={selectedUser.email}
+                  onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })}
+                  className="col-span-3"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="edit-role" className="text-right">Role</Label>
+                <Input
+                  id="edit-role"
+                  value={selectedUser.role}
+                  onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value as UserRole })}
+                  className="col-span-3"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="edit-status" className="text-right">Status</Label>
+                <Input
+                  id="edit-status"
+                  value={selectedUser.status}
+                  onChange={(e) => setSelectedUser({ ...selectedUser, status: e.target.value })}
+                  className="col-span-3"
+                />
+              </div>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleUpdateUser}>Update User</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

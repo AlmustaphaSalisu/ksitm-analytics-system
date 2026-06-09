@@ -1,13 +1,57 @@
 import { useState } from 'react';
-import { MessageSquare, Send, Search, Filter, Clock, Check, CheckCheck } from 'lucide-react';
+import { MessageSquare, Send, Search, Filter, Clock, Check, CheckCheck, X } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 
 const LecturerMessagesPage = () => {
   const [newMessage, setNewMessage] = useState('');
+  const [isNewMessageDialogOpen, setIsNewMessageDialogOpen] = useState(false);
+  const [recipient, setRecipient] = useState('');
+  const [subject, setSubject] = useState('');
+  const [messageContent, setMessageContent] = useState('');
+  const [conversations, setConversations] = useState([
+    {
+      id: 1,
+      name: 'John Smith',
+      role: 'Student',
+      lastMessage: 'Thank you for the clarification on the assignment',
+      time: '2 hours ago',
+      unread: 2,
+      avatar: 'JS',
+    },
+    {
+      id: 2,
+      name: 'Sarah Johnson',
+      role: 'Student',
+      lastMessage: 'Can we schedule a meeting to discuss my project?',
+      time: '5 hours ago',
+      unread: 1,
+      avatar: 'SJ',
+    },
+    {
+      id: 3,
+      name: 'Dr. Michael Brown',
+      role: 'Colleague',
+      lastMessage: 'Great work on the curriculum update!',
+      time: '1 day ago',
+      unread: 0,
+      avatar: 'MB',
+    },
+    {
+      id: 4,
+      name: 'Emily Davis',
+      role: 'Student',
+      lastMessage: 'I submitted the revised assignment',
+      time: '2 days ago',
+      unread: 0,
+      avatar: 'ED',
+    },
+  ]);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -46,45 +90,6 @@ const LecturerMessagesPage = () => {
     },
   ]);
 
-  const conversations = [
-    {
-      id: 1,
-      name: 'John Smith',
-      role: 'Student',
-      lastMessage: 'Thank you for the clarification on the assignment',
-      time: '2 hours ago',
-      unread: 2,
-      avatar: 'JS',
-    },
-    {
-      id: 2,
-      name: 'Sarah Johnson',
-      role: 'Student',
-      lastMessage: 'Can we schedule a meeting to discuss my project?',
-      time: '5 hours ago',
-      unread: 1,
-      avatar: 'SJ',
-    },
-    {
-      id: 3,
-      name: 'Dr. Michael Brown',
-      role: 'Colleague',
-      lastMessage: 'Great work on the curriculum update!',
-      time: '1 day ago',
-      unread: 0,
-      avatar: 'MB',
-    },
-    {
-      id: 4,
-      name: 'Emily Davis',
-      role: 'Student',
-      lastMessage: 'I submitted the revised assignment',
-      time: '2 days ago',
-      unread: 0,
-      avatar: 'ED',
-    },
-  ];
-
   const handleSendMessage = () => {
     if (newMessage.trim()) {
       const newMsg = {
@@ -106,6 +111,25 @@ const LecturerMessagesPage = () => {
     }
   };
 
+  const handleNewMessage = () => {
+    if (recipient.trim() && subject.trim() && messageContent.trim()) {
+      const newConversation = {
+        id: conversations.length + 1,
+        name: recipient,
+        role: 'Student',
+        lastMessage: subject,
+        time: 'Just now',
+        unread: 0,
+        avatar: recipient.split(' ').map((n: string) => n[0]).join(''),
+      };
+      setConversations([newConversation, ...conversations]);
+      setRecipient('');
+      setSubject('');
+      setMessageContent('');
+      setIsNewMessageDialogOpen(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -113,7 +137,7 @@ const LecturerMessagesPage = () => {
           <h1 className="text-3xl font-bold">Messages</h1>
           <p className="text-muted-foreground">Communicate with students and colleagues</p>
         </div>
-        <Button onClick={() => alert('New message functionality would be implemented here')}>
+        <Button onClick={() => setIsNewMessageDialogOpen(true)}>
           <MessageSquare className="mr-2 h-4 w-4" />
           New Message
         </Button>
@@ -171,7 +195,7 @@ const LecturerMessagesPage = () => {
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle>John Smith</CardTitle>
-                <CardDescription>Student - CS101</CardDescription>
+                <CardDescription>Student - CSE101</CardDescription>
               </div>
               <Button variant="outline" size="sm">
                 <Filter className="mr-2 h-4 w-4" />
@@ -272,6 +296,52 @@ const LecturerMessagesPage = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* New Message Dialog */}
+      <Dialog open={isNewMessageDialogOpen} onOpenChange={setIsNewMessageDialogOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>New Message</DialogTitle>
+            <DialogDescription>Send a new message to a student or colleague.</DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="recipient" className="text-right">Recipient</Label>
+              <Input
+                id="recipient"
+                value={recipient}
+                onChange={(e) => setRecipient(e.target.value)}
+                className="col-span-3"
+                placeholder="Name"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="subject" className="text-right">Subject</Label>
+              <Input
+                id="subject"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                className="col-span-3"
+                placeholder="Subject"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="message" className="text-right">Message</Label>
+              <Input
+                id="message"
+                value={messageContent}
+                onChange={(e) => setMessageContent(e.target.value)}
+                className="col-span-3"
+                placeholder="Type your message..."
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsNewMessageDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleNewMessage}>Send Message</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

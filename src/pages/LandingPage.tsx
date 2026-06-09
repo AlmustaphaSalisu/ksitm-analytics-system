@@ -25,9 +25,7 @@ export default function LandingPage() {
       <nav className="sticky top-0 z-50 border-b bg-card/80 backdrop-blur-md">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-primary">
-              <GraduationCap className="h-5 w-5 text-primary-foreground" />
-            </div>
+            <img src="/favicon.ico" alt="KSITM Logo" className="h-9 w-9" />
             <span className="text-lg font-bold">KSITM Analytics</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
@@ -127,10 +125,10 @@ export default function LandingPage() {
       <footer className="border-t py-8">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <GraduationCap className="h-5 w-5 text-primary" />
+            <img src="/favicon.ico" alt="KSITM Logo" className="h-5 w-5" />
             <span className="text-sm font-semibold">KSITM Analytics</span>
           </div>
-          <p className="text-xs text-muted-foreground">© 2024 Katsina State Institute of Technology and Management. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">© 2026 Katsina State Institute of Technology and Management. All rights reserved.</p>
         </div>
       </footer>
     </div>

@@ -3,8 +3,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { useState } from 'react';
 
 const SysAdminAPIPage = () => {
+  const [globalRateLimit, setGlobalRateLimit] = useState('1000');
+  const [burstLimit, setBurstLimit] = useState('100');
+  const [corsSettings, setCorsSettings] = useState('');
+  const [apiVersion, setApiVersion] = useState('v1');
+  const [notification, setNotification] = useState<{ type: 'success' | 'error', message: string } | null>(null);
   const apiKeys = [
     {
       id: 1,
@@ -125,8 +131,23 @@ const SysAdminAPIPage = () => {
     }
   };
 
+  const handleUpdateRateLimits = () => {
+    setNotification({ type: 'success', message: 'Rate limits updated successfully!' });
+    setTimeout(() => setNotification(null), 3000);
+  };
+
+  const handleUpdateSecuritySettings = () => {
+    setNotification({ type: 'success', message: 'Security settings updated successfully!' });
+    setTimeout(() => setNotification(null), 3000);
+  };
+
   return (
     <div className="space-y-6">
+      {notification && (
+        <div className={`p-4 rounded-lg ${notification.type === 'success' ? 'bg-green-500/10 text-green-600 border-green-500/20' : 'bg-red-500/10 text-red-600 border-red-500/20'} border`}>
+          {notification.message}
+        </div>
+      )}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">API Configuration</h1>
@@ -268,18 +289,18 @@ const SysAdminAPIPage = () => {
               <div className="p-4 border rounded-lg">
                 <h4 className="font-semibold mb-2">Global Rate Limit</h4>
                 <div className="flex items-center gap-2">
-                  <Input type="number" defaultValue="1000" className="w-24" />
+                  <Input type="number" value={globalRateLimit} onChange={(e) => setGlobalRateLimit(e.target.value)} className="w-24" />
                   <span className="text-sm text-muted-foreground">requests per hour</span>
                 </div>
               </div>
               <div className="p-4 border rounded-lg">
                 <h4 className="font-semibold mb-2">Burst Limit</h4>
                 <div className="flex items-center gap-2">
-                  <Input type="number" defaultValue="100" className="w-24" />
+                  <Input type="number" value={burstLimit} onChange={(e) => setBurstLimit(e.target.value)} className="w-24" />
                   <span className="text-sm text-muted-foreground">requests per minute</span>
                 </div>
               </div>
-              <Button className="w-full" onClick={() => alert('Rate limits updated successfully!')}>Update Rate Limits</Button>
+              <Button className="w-full" onClick={handleUpdateRateLimits}>Update Rate Limits</Button>
             </div>
           </CardContent>
         </Card>
@@ -293,17 +314,17 @@ const SysAdminAPIPage = () => {
             <div className="space-y-4">
               <div className="p-4 border rounded-lg">
                 <h4 className="font-semibold mb-2">CORS Settings</h4>
-                <Input placeholder="https://yourdomain.com" className="mb-2" />
+                <Input placeholder="https://yourdomain.com" className="mb-2" value={corsSettings} onChange={(e) => setCorsSettings(e.target.value)} />
                 <p className="text-xs text-muted-foreground">Allowed origins (comma-separated)</p>
               </div>
               <div className="p-4 border rounded-lg">
                 <h4 className="font-semibold mb-2">API Versioning</h4>
-                <select className="w-full p-2 border rounded">
-                  <option>v1 (Current)</option>
-                  <option>v2 (Beta)</option>
+                <select className="w-full p-2 border rounded" value={apiVersion} onChange={(e) => setApiVersion(e.target.value)}>
+                  <option value="v1">v1 (Current)</option>
+                  <option value="v2">v2 (Beta)</option>
                 </select>
               </div>
-              <Button className="w-full" onClick={() => alert('Security settings updated successfully!')}>Update Security Settings</Button>
+              <Button className="w-full" onClick={handleUpdateSecuritySettings}>Update Security Settings</Button>
             </div>
           </CardContent>
         </Card>

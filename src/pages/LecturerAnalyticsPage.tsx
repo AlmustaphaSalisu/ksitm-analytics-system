@@ -36,21 +36,21 @@ const LecturerAnalyticsPage = () => {
 
   const courseAnalytics = [
     {
-      course: 'CS101',
+      course: 'CSE101',
       students: 45,
       avgGrade: 76,
       completionRate: 89,
       engagement: 81,
     },
     {
-      course: 'CS201',
+      course: 'CSE111',
       students: 38,
       avgGrade: 82,
       completionRate: 94,
       engagement: 85,
     },
     {
-      course: 'CS301',
+      course: 'CSE201',
       students: 32,
       avgGrade: 79,
       completionRate: 91,
