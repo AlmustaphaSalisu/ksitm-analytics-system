@@ -12,11 +12,11 @@ export interface User {
 }
 
 export const mockUsers: Record<UserRole, User> = {
-  student: { id: '1', name: 'Amina Yusuf', email: 'amina@ksitm.edu.ng', role: 'student', department: 'COM' },
-  lecturer: { id: '2', name: 'Dr. Ibrahim Musa', email: 'ibrahim@ksitm.edu.ng', role: 'lecturer', department: 'COM' },
+  student: { id: '1', name: 'Kabir Rabi\'atu', email: 'kabir.rabi@ksitm.edu.ng', role: 'student', department: 'COM' },
+  lecturer: { id: '2', name: 'Dr. Abubakar Ahmad', email: 'abubakar@ksitm.edu.ng', role: 'lecturer', department: 'COM' },
   hod: { id: '3', name: 'Prof. Fatima Abubakar', email: 'fatima@ksitm.edu.ng', role: 'hod', department: 'COM' },
   admin: { id: '4', name: 'Alhaji Sani Bello', email: 'sani@ksitm.edu.ng', role: 'admin' },
-  sysadmin: { id: '5', name: 'Usman Danladi', email: 'usman@ksitm.edu.ng', role: 'sysadmin' },
+  sysadmin: { id: '5', name: 'Kauthar Kabir', email: 'kauthar@ksitm.edu.ng', role: 'sysadmin' },
 };
 
 export const roleLabels: Record<UserRole, string> = {
@@ -71,11 +71,11 @@ export const lecturerData = {
     { code: 'CSE111', name: 'Introduction to Programming', students: 21, avgScore: 58, passRate: 65, attendance: 76 },
   ],
   atRiskList: [
-    { id: '101', name: 'Ahmad Bello', course: 'CSE101', score: 35, attendance: 45, risk: 'high' as const },
-    { id: '102', name: 'Zainab Musa', course: 'CSE102', score: 42, attendance: 55, risk: 'high' as const },
-    { id: '103', name: 'Ibrahim Sani', course: 'CSE111', score: 48, attendance: 60, risk: 'medium' as const },
-    { id: '104', name: 'Hauwa Danladi', course: 'CSE201', score: 50, attendance: 68, risk: 'medium' as const },
-    { id: '105', name: 'Yusuf Abdullahi', course: 'CSE101', score: 38, attendance: 50, risk: 'high' as const },
+    { id: '101', name: 'Kabir Rabi\'atu', course: 'CSE101', score: 35, attendance: 45, risk: 'high' as const },
+    { id: '102', name: 'Faruk Aisha Sambo', course: 'CSE102', score: 42, attendance: 55, risk: 'high' as const },
+    { id: '103', name: 'Sani Khadija', course: 'CSE111', score: 48, attendance: 60, risk: 'medium' as const },
+    { id: '104', name: 'Mustapha Fatima', course: 'CSE201', score: 50, attendance: 68, risk: 'medium' as const },
+    { id: '105', name: 'Abubakar Halimatu Sadiq', course: 'CSE101', score: 38, attendance: 50, risk: 'high' as const },
   ],
   performanceTrend: [
     { month: 'Sep', avgScore: 62, attendance: 85 },
@@ -100,11 +100,11 @@ export const hodData = {
   atRiskCount: 67,
   courses: 18,
   lecturerPerformance: [
-    { name: 'Dr. Ibrahim Musa', courses: 4, avgScore: 72, rating: 4.5, passRate: 82 },
-    { name: 'Dr. Aisha Lawal', courses: 3, avgScore: 68, rating: 4.2, passRate: 76 },
-    { name: 'Prof. Kabir Ahmed', courses: 3, avgScore: 75, rating: 4.7, passRate: 88 },
-    { name: 'Dr. Maryam Suleiman', courses: 2, avgScore: 60, rating: 3.8, passRate: 68 },
-    { name: 'Dr. Bashir Yusuf', courses: 3, avgScore: 65, rating: 4.0, passRate: 72 },
+    { name: 'Dr. Abubakar Ahmad', courses: 4, avgScore: 72, rating: 4.5, passRate: 82 },
+    { name: 'Lawal Ahmad Al-Hassan', courses: 3, avgScore: 68, rating: 4.2, passRate: 76 },
+    { name: 'Aisha Abdulkadiri', courses: 3, avgScore: 75, rating: 4.7, passRate: 88 },
+    { name: 'Mohammed Hamza Kankara', courses: 2, avgScore: 60, rating: 3.8, passRate: 68 },
+    { name: 'Abdullahi Hassan Dan Ali', courses: 3, avgScore: 65, rating: 4.0, passRate: 72 },
   ],
   courseComparison: [
     { course: 'CSE101', passRate: 85, avgScore: 72, students: 45 },
@@ -162,12 +162,12 @@ export const sysadminData = {
   uptime: '99.97%',
   storageUsed: 67,
   users: [
-    { id: '1', name: 'Amina Yusuf', email: 'amina@ksitm.edu.ng', role: 'student' as const, status: 'active', lastLogin: '2024-01-15' },
-    { id: '2', name: 'Dr. Ibrahim Musa', email: 'ibrahim@ksitm.edu.ng', role: 'lecturer' as const, status: 'active', lastLogin: '2024-01-15' },
+    { id: '1', name: 'Kabir Rabi\'atu', email: 'kabir.rabi@ksitm.edu.ng', role: 'student' as const, status: 'active', lastLogin: '2024-01-15' },
+    { id: '2', name: 'Dr. Abubakar Ahmad', email: 'abubakar@ksitm.edu.ng', role: 'lecturer' as const, status: 'active', lastLogin: '2024-01-15' },
     { id: '3', name: 'Prof. Fatima Abubakar', email: 'fatima@ksitm.edu.ng', role: 'hod' as const, status: 'active', lastLogin: '2024-01-14' },
     { id: '4', name: 'Alhaji Sani Bello', email: 'sani@ksitm.edu.ng', role: 'admin' as const, status: 'active', lastLogin: '2024-01-15' },
-    { id: '5', name: 'Usman Danladi', email: 'usman@ksitm.edu.ng', role: 'sysadmin' as const, status: 'active', lastLogin: '2024-01-15' },
-    { id: '6', name: 'Halima Garba', email: 'halima@ksitm.edu.ng', role: 'student' as const, status: 'inactive', lastLogin: '2024-01-10' },
+    { id: '5', name: 'Kauthar Kabir', email: 'kauthar@ksitm.edu.ng', role: 'sysadmin' as const, status: 'active', lastLogin: '2024-01-15' },
+    { id: '6', name: 'Faruk Aisha Sambo', email: 'faruk.aisha@ksitm.edu.ng', role: 'student' as const, status: 'inactive', lastLogin: '2024-01-10' },
   ],
   logs: [
     { time: '14:32:05', level: 'info', message: 'User login: amina@ksitm.edu.ng', source: 'auth' },

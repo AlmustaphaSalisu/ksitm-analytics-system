@@ -43,7 +43,7 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden gradient-hero py-24 lg:py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(221_83%_53%_/_0.15),_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(275_70%_50%_/_0.15),_transparent_50%)]" />
         <div className="container mx-auto px-4 relative">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-6">
@@ -63,7 +63,7 @@ export default function LandingPage() {
                   Get Started <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 hover:text-primary-foreground text-base px-8 font-semibold">
+              <Button size="lg" variant="outline" className="border-accent/50 text-accent hover:bg-accent/10 hover:text-accent-foreground text-base px-8 font-semibold">
                 Learn More
               </Button>
             </div>
@@ -86,10 +86,10 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="py-20">
+      <section id="features" className="py-20 bg-gradient-to-b from-background to-purple-50/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold mb-3">Powerful Features</h2>
+            <h2 className="text-3xl font-bold mb-3 text-primary">Powerful Features</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Everything you need to transform academic performance tracking and decision-making.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -107,9 +107,9 @@ export default function LandingPage() {
       </section>
 
       {/* About */}
-      <section id="about" className="py-20 bg-muted/50">
+      <section id="about" className="py-20 bg-gradient-to-b from-purple-50/30 to-muted/50">
         <div className="container mx-auto px-4 text-center max-w-2xl">
-          <h2 className="text-3xl font-bold mb-4">About KSITM Analytics</h2>
+          <h2 className="text-3xl font-bold mb-4 text-primary">About KSITM Analytics</h2>
           <p className="text-muted-foreground leading-relaxed mb-6">
             This AI-driven Smart Learning Analytics System is designed specifically for the Katsina State Institute of Technology and Management. It provides actionable insights across all academic levels — from individual student progress to institution-wide performance metrics.
           </p>

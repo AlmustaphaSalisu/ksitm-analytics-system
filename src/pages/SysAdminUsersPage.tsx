@@ -12,8 +12,8 @@ const SysAdminUsersPage = () => {
   const [users, setUsers] = useState([
     {
       id: 1,
-      name: 'John Smith',
-      email: 'john.smith@ksitm.edu',
+      name: 'Dr. Abubakar Ahmad',
+      email: 'abubakar@ksitm.edu',
       role: 'lecturer',
       department: 'COM',
       status: 'active',
@@ -22,8 +22,8 @@ const SysAdminUsersPage = () => {
     },
     {
       id: 2,
-      name: 'Sarah Johnson',
-      email: 'sarah.j@ksitm.edu',
+      name: 'Kabir Rabi\'atu',
+      email: 'kabir.rabi@ksitm.edu',
       role: 'student',
       department: 'COM',
       status: 'active',
@@ -32,8 +32,8 @@ const SysAdminUsersPage = () => {
     },
     {
       id: 3,
-      name: 'Dr. Michael Brown',
-      email: 'michael.b@ksitm.edu',
+      name: 'Prof. Fatima Abubakar',
+      email: 'fatima@ksitm.edu',
       role: 'hod',
       department: 'COM',
       status: 'active',
@@ -42,13 +42,13 @@ const SysAdminUsersPage = () => {
     },
     {
       id: 4,
-      name: 'Emily Davis',
-      email: 'emily.d@ksitm.edu',
-      role: 'admin',
-      department: 'BOP',
+      name: 'Faruk Aisha Sambo',
+      email: 'faruk.aisha@ksitm.edu',
+      role: 'student',
+      department: 'COM',
       status: 'inactive',
       lastLogin: '1 week ago',
-      permissions: ['admin', 'system_config'],
+      permissions: ['student', 'view_grades'],
     },
   ]);
 

@@ -8,28 +8,28 @@ const LecturerAttendancePage = () => {
   const todayAttendance = [
     {
       id: 1,
-      studentName: 'John Smith',
+      studentName: 'Kabir Rabi\'atu',
       time: '8:55 AM',
       status: 'present',
       course: 'CSE101',
     },
     {
       id: 2,
-      studentName: 'Sarah Johnson',
+      studentName: 'Faruk Aisha Sambo',
       time: '9:02 AM',
       status: 'present',
       course: 'CSE101',
     },
     {
       id: 3,
-      studentName: 'Michael Brown',
+      studentName: 'Sani Khadija',
       time: '--',
       status: 'absent',
       course: 'CSE101',
     },
     {
       id: 4,
-      studentName: 'Emily Davis',
+      studentName: 'Mustapha Fatima',
       time: '8:58 AM',
       status: 'present',
       course: 'CSE101',

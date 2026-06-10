@@ -30,7 +30,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen">
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 gradient-hero items-center justify-center p-12 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_hsl(221_83%_53%_/_0.2),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_hsl(275_70%_50%_/_0.2),_transparent_60%)]" />
         <div className="relative text-center max-w-md">
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl gradient-primary mx-auto mb-6">
             <GraduationCap className="h-8 w-8 text-primary-foreground" />
@@ -52,12 +52,12 @@ export default function LoginPage() {
             <span className="text-lg font-bold">KSITM Analytics</span>
           </div>
 
-          <h1 className="text-2xl font-bold mb-1">Welcome back</h1>
+          <h1 className="text-2xl font-bold mb-1 text-primary">Welcome back</h1>
           <p className="text-sm text-muted-foreground mb-8">Sign in to access your dashboard</p>
 
           {/* Role selector */}
           <div className="mb-6">
-            <p className="text-sm font-medium mb-3">Select your role</p>
+            <p className="text-sm font-medium mb-3 text-primary">Select your role</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {roles.map(r => (
                 <button
@@ -66,7 +66,7 @@ export default function LoginPage() {
                   className={`rounded-lg border p-3 text-left transition-all ${
                     selectedRole === r.value
                       ? 'border-primary bg-primary/5 ring-1 ring-primary'
-                      : 'border-border hover:border-primary/50'
+                      : 'border-border hover:border-accent/50 hover:bg-accent/5'
                   }`}
                 >
                   <p className="text-sm font-medium">{r.label}</p>

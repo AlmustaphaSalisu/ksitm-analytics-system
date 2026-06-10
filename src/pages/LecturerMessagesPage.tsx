@@ -17,45 +17,45 @@ const LecturerMessagesPage = () => {
   const [conversations, setConversations] = useState([
     {
       id: 1,
-      name: 'John Smith',
+      name: 'Kabir Rabi\'atu',
       role: 'Student',
       lastMessage: 'Thank you for the clarification on the assignment',
       time: '2 hours ago',
       unread: 2,
-      avatar: 'JS',
+      avatar: 'KR',
     },
     {
       id: 2,
-      name: 'Sarah Johnson',
+      name: 'Faruk Aisha Sambo',
       role: 'Student',
       lastMessage: 'Can we schedule a meeting to discuss my project?',
       time: '5 hours ago',
       unread: 1,
-      avatar: 'SJ',
+      avatar: 'FS',
     },
     {
       id: 3,
-      name: 'Dr. Michael Brown',
+      name: 'Dr. Abubakar Ahmad',
       role: 'Colleague',
       lastMessage: 'Great work on the curriculum update!',
       time: '1 day ago',
       unread: 0,
-      avatar: 'MB',
+      avatar: 'AA',
     },
     {
       id: 4,
-      name: 'Emily Davis',
+      name: 'Sani Khadija',
       role: 'Student',
       lastMessage: 'I submitted the revised assignment',
       time: '2 days ago',
       unread: 0,
-      avatar: 'ED',
+      avatar: 'SK',
     },
   ]);
   const [messages, setMessages] = useState([
     {
       id: 1,
-      sender: 'John Smith',
+      sender: 'Kabir Rabi\'atu',
       content: 'Hi Professor, I have a question about the data structures assignment.',
       time: '3:30 PM',
       isMe: false,
@@ -69,7 +69,7 @@ const LecturerMessagesPage = () => {
     },
     {
       id: 3,
-      sender: 'John Smith',
+      sender: 'Kabir Rabi\'atu',
       content: 'The binary tree traversal algorithms are a bit confusing.',
       time: '3:40 PM',
       isMe: false,
@@ -83,7 +83,7 @@ const LecturerMessagesPage = () => {
     },
     {
       id: 5,
-      sender: 'John Smith',
+      sender: 'Kabir Rabi\'atu',
       content: 'Thank you for the clarification on the assignment',
       time: '3:50 PM',
       isMe: false,
@@ -194,7 +194,7 @@ const LecturerMessagesPage = () => {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>John Smith</CardTitle>
+                <CardTitle>Kabir Rabi\'atu</CardTitle>
                 <CardDescription>Student - CSE101</CardDescription>
               </div>
               <Button variant="outline" size="sm">
