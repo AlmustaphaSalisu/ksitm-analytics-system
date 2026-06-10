@@ -7,59 +7,21 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
+import { useUsers } from '@/hooks/useUsers';
+import type { SystemUser } from '@/types';
+import type { UserRole } from '@/lib/mock-data';
 
 const SysAdminUsersPage = () => {
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      name: 'Dr. Abubakar Ahmad',
-      email: 'abubakar@ksitm.edu',
-      role: 'lecturer',
-      department: 'COM',
-      status: 'active',
-      lastLogin: '2 hours ago',
-      permissions: ['lecturer', 'attendance', 'grading'],
-    },
-    {
-      id: 2,
-      name: 'Kabir Rabi\'atu',
-      email: 'kabir.rabi@ksitm.edu',
-      role: 'student',
-      department: 'COM',
-      status: 'active',
-      lastLogin: '1 day ago',
-      permissions: ['student', 'view_grades'],
-    },
-    {
-      id: 3,
-      name: 'Prof. Fatima Abubakar',
-      email: 'fatima@ksitm.edu',
-      role: 'hod',
-      department: 'COM',
-      status: 'active',
-      lastLogin: '30 minutes ago',
-      permissions: ['hod', 'department_management', 'reports'],
-    },
-    {
-      id: 4,
-      name: 'Faruk Aisha Sambo',
-      email: 'faruk.aisha@ksitm.edu',
-      role: 'student',
-      department: 'COM',
-      status: 'inactive',
-      lastLogin: '1 week ago',
-      permissions: ['student', 'view_grades'],
-    },
-  ]);
+  const { users, addUser, deleteUser } = useUsers();
 
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
-    role: 'student',
+    role: 'student' as UserRole,
     department: 'COM',
-    status: 'active',
+    status: 'active' as SystemUser['status'],
   });
 
   const getRoleColor = (role: string) => {
@@ -83,13 +45,11 @@ const SysAdminUsersPage = () => {
   };
 
   const handleAddUser = () => {
-    const user = {
-      id: users.length + 1,
+    addUser({
       ...newUser,
       lastLogin: 'Never',
       permissions: [newUser.role],
-    };
-    setUsers([...users, user]);
+    });
     setNewUser({
       name: '',
       email: '',
@@ -100,8 +60,8 @@ const SysAdminUsersPage = () => {
     setIsAddDialogOpen(false);
   };
 
-  const handleDeleteUser = (id: number) => {
-    setUsers(users.filter(user => user.id !== id));
+  const handleDeleteUser = (id: string) => {
+    deleteUser(id);
   };
 
   const filteredUsers = users.filter(user =>
@@ -203,7 +163,7 @@ const SysAdminUsersPage = () => {
                     <p className="text-sm text-muted-foreground">{user.email}</p>
                     <div className="flex items-center gap-2 mt-1">
                       <Badge variant={getRoleColor(user.role)}>{user.role}</Badge>
-                      <Badge variant="outline">{user.department}</Badge>
+                      {user.department && <Badge variant="outline">{user.department}</Badge>}
                       <Badge variant={getStatusColor(user.status)}>{user.status}</Badge>
                     </div>
                   </div>
@@ -263,7 +223,7 @@ const SysAdminUsersPage = () => {
               <Input
                 id="role"
                 value={newUser.role}
-                onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                onChange={(e) => setNewUser({ ...newUser, role: e.target.value as UserRole })}
                 className="col-span-3"
                 placeholder="student, lecturer, hod, admin, sysadmin"
               />
@@ -282,7 +242,7 @@ const SysAdminUsersPage = () => {
               <Input
                 id="status"
                 value={newUser.status}
-                onChange={(e) => setNewUser({ ...newUser, status: e.target.value })}
+                onChange={(e) => setNewUser({ ...newUser, status: e.target.value as SystemUser['status'] })}
                 className="col-span-3"
                 placeholder="active, inactive, suspended"
               />

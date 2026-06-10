@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-import { UserRole, User, mockUsers } from '@/lib/mock-data';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import type { UserRole, User } from '@/lib/mock-data';
+import { AuthService } from '@/services/AuthService';
 
 interface AuthContextType {
   user: User | null;
@@ -12,13 +13,24 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => AuthService.getCurrentUser());
+
+  useEffect(() => {
+    const storedUser = AuthService.getCurrentUser();
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
 
   const login = useCallback((role: UserRole) => {
-    setUser(mockUsers[role]);
+    const authUser = AuthService.login(role);
+    if (authUser) {
+      setUser(authUser);
+    }
   }, []);
 
   const logout = useCallback(() => {
+    AuthService.logout();
     setUser(null);
   }, []);
 

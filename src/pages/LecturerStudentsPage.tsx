@@ -1,5 +1,5 @@
-import { Users, Search, Filter, Mail, Phone, BookOpen, TrendingUp, X } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Users, Search, Filter, Mail, Phone, BookOpen, TrendingUp } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -7,58 +7,15 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
+import { useStudents } from '@/hooks/useStudents';
+import type { Student } from '@/types';
 
 const LecturerStudentsPage = () => {
-  const [students, setStudents] = useState([
-    {
-      id: 1,
-      name: 'Kabir Rabi\'atu',
-      email: 'kabir.rabi@ksitm.edu',
-      phone: '09030074007',
-      program: 'COM',
-      level: '200',
-      gpa: 3.8,
-      attendance: 92,
-      status: 'active',
-    },
-    {
-      id: 2,
-      name: 'Faruk Aisha Sambo',
-      email: 'faruk.aisha@ksitm.edu',
-      phone: '08133554894',
-      program: 'COM',
-      level: '200',
-      gpa: 3.6,
-      attendance: 88,
-      status: 'active',
-    },
-    {
-      id: 3,
-      name: 'Sani Khadija',
-      email: 'sani.khadija@ksitm.edu',
-      phone: '09010925004',
-      program: 'COM',
-      level: '200',
-      gpa: 3.2,
-      attendance: 75,
-      status: 'warning',
-    },
-    {
-      id: 4,
-      name: 'Mustapha Fatima',
-      email: 'mustapha.fatima@ksitm.edu',
-      phone: '07049545010',
-      program: 'COM',
-      level: '200',
-      gpa: 3.9,
-      attendance: 95,
-      status: 'active',
-    },
-  ]);
+  const { students, addStudent } = useStudents();
 
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState<any>(null);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [newStudent, setNewStudent] = useState({
     name: '',
@@ -68,7 +25,7 @@ const LecturerStudentsPage = () => {
     level: '100',
     gpa: 0,
     attendance: 0,
-    status: 'active',
+    status: 'active' as Student['status'],
   });
 
   const getStatusColor = (status: string) => {
@@ -80,13 +37,11 @@ const LecturerStudentsPage = () => {
   };
 
   const handleAddStudent = () => {
-    const student = {
-      id: students.length + 1,
+    addStudent({
       ...newStudent,
       gpa: parseFloat(newStudent.gpa.toString()),
-      attendance: parseInt(newStudent.attendance.toString()),
-    };
-    setStudents([...students, student]);
+      attendance: parseInt(newStudent.attendance.toString(), 10),
+    });
     setNewStudent({
       name: '',
       email: '',
@@ -100,7 +55,7 @@ const LecturerStudentsPage = () => {
     setIsAddDialogOpen(false);
   };
 
-  const handleViewDetails = (student: any) => {
+  const handleViewDetails = (student: Student) => {
     setSelectedStudent(student);
     setIsViewDialogOpen(true);
   };
@@ -289,7 +244,7 @@ const LecturerStudentsPage = () => {
                 type="number"
                 step="0.1"
                 value={newStudent.gpa}
-                onChange={(e) => setNewStudent({ ...newStudent, gpa: e.target.value })}
+                onChange={(e) => setNewStudent({ ...newStudent, gpa: parseFloat(e.target.value) || 0 })}
                 className="col-span-3"
               />
             </div>
@@ -299,7 +254,7 @@ const LecturerStudentsPage = () => {
                 id="attendance"
                 type="number"
                 value={newStudent.attendance}
-                onChange={(e) => setNewStudent({ ...newStudent, attendance: e.target.value })}
+                onChange={(e) => setNewStudent({ ...newStudent, attendance: parseInt(e.target.value, 10) || 0 })}
                 className="col-span-3"
               />
             </div>

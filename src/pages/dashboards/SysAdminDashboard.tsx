@@ -9,6 +9,8 @@ import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { useUsers } from '@/hooks/useUsers';
+import type { SystemUser } from '@/types';
 
 const d = sysadminData;
 
@@ -20,41 +22,46 @@ const logLevelStyles = {
 
 export default function SysAdminDashboard() {
   const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'logs'>('overview');
-  const [users, setUsers] = useState(sysadminData.users);
+  const { users, addUser, updateUser, deleteUser } = useUsers();
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [selectedUser, setSelectedUser] = useState<SystemUser | null>(null);
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
     role: 'student' as UserRole,
-    status: 'active',
+    status: 'active' as SystemUser['status'],
   });
 
   const handleAddUser = () => {
-    const user = {
-      id: String(users.length + 1),
+    addUser({
       ...newUser,
       lastLogin: 'Never',
-    };
-    setUsers([...users, user]);
+      permissions: [newUser.role],
+    });
     setNewUser({ name: '', email: '', role: 'student', status: 'active' });
     setIsAddDialogOpen(false);
   };
 
-  const handleEditUser = (user: any) => {
+  const handleEditUser = (user: SystemUser) => {
     setSelectedUser(user);
     setIsEditDialogOpen(true);
   };
 
   const handleUpdateUser = () => {
-    setUsers(users.map(u => u.id === selectedUser.id ? { ...u, ...selectedUser } : u));
+    if (!selectedUser) return;
+    updateUser(selectedUser.id, {
+      name: selectedUser.name,
+      email: selectedUser.email,
+      role: selectedUser.role,
+      status: selectedUser.status,
+    });
     setIsEditDialogOpen(false);
     setSelectedUser(null);
   };
 
   const handleDeleteUser = (id: string) => {
-    setUsers(users.filter(u => u.id !== id));
+    deleteUser(id);
   };
 
   return (
@@ -214,7 +221,7 @@ export default function SysAdminDashboard() {
               <Input
                 id="status"
                 value={newUser.status}
-                onChange={(e) => setNewUser({ ...newUser, status: e.target.value })}
+                onChange={(e) => setNewUser({ ...newUser, status: e.target.value as SystemUser['status'] })}
                 className="col-span-3"
                 placeholder="active, inactive"
               />
@@ -269,7 +276,7 @@ export default function SysAdminDashboard() {
                 <Input
                   id="edit-status"
                   value={selectedUser.status}
-                  onChange={(e) => setSelectedUser({ ...selectedUser, status: e.target.value })}
+                  onChange={(e) => setSelectedUser({ ...selectedUser, status: e.target.value as SystemUser['status'] })}
                   className="col-span-3"
                 />
               </div>
