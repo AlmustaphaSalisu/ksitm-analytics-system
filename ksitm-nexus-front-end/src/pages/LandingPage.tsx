@@ -48,15 +48,15 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(221_83%_53%_/_0.15),_transparent_50%)]" />
         <div className="container mx-auto px-4 relative">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-6">
-              <Sparkles className="h-3.5 w-3.5 text-primary" />
-              <span className="text-xs font-medium text-primary">AI-Powered Academic Analytics</span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#FF8C00]/50 bg-[#FF8C00]/10 px-4 py-1.5 mb-6 shadow-[0_0_20px_rgba(255,140,0,0.35)]">
+              <Sparkles className="h-3.5 w-3.5 text-[#FFA726]" />
+              <span className="text-xs font-medium text-[#FF8C00]" style={{ textShadow: '0 0 15px rgba(255, 140, 0, 0.35)' }}>AI-Powered Academic Analytics</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-primary-foreground mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#FF8C00] mb-6 leading-tight" style={{ textShadow: '0 0 15px rgba(255, 140, 0, 0.35)' }}>
               Smart Learning Analytics for{' '}
-              <span className="gradient-accent bg-clip-text text-transparent">KSITM</span>
+              <span className="font-black text-[#FF8C00] bg-[#FF8C00]/10 px-3 py-1 rounded-lg border-2 border-[#FF8C00]/50 shadow-[0_0_15px_rgba(255,140,0,0.35)]">KSITM</span>
             </h1>
-            <p className="text-lg text-primary-foreground/70 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-[#FF8C00] mb-8 max-w-2xl mx-auto leading-relaxed" style={{ textShadow: '0 0 15px rgba(255, 140, 0, 0.35)' }}>
               Harness AI to improve teaching quality, boost student performance, and detect dropout risks early. A comprehensive analytics platform for Katsina State Institute of Technology and Management.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -65,7 +65,7 @@ export default function LandingPage() {
                   Get Started <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 text-base px-8">
+              <Button size="lg" variant="outline" className="border-[#FF8C00]/50 text-[#FF8C00] hover:bg-[#FF8C00]/10 hover:text-[#FFA726] text-base px-8" style={{ textShadow: '0 0 15px rgba(255, 140, 0, 0.35)' }}>
                 Learn More
               </Button>
             </div>
